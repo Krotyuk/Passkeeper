@@ -27,6 +27,20 @@ def access_new(request):
         form = accessForm()
     return render(request, 'keeper/access_edit.html', {'form': form})
 
+def access_edit(request, pk):
+    post = get_object_or_404(accessPost, pk=pk)
+    if request.method == "POST":
+        form = accessForm(request.POST, instance=post)
+        if form.is_valid():
+            accessPost = form.save(commit=False)
+            accessPost.author = request.user
+
+            accessPost.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = accessForm(instance=post)
+    return render(request, 'blog/access_edit.html', {'form': form})
+
 def access_delete(request, pk):
     listOfAccess = accessPost.objects.filter(pk=pk).delete()
     return render(request, 'keeper/access_list.html', {'listOfAccess': listOfAccess})

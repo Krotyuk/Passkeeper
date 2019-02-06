@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Passkeeper</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <div class="page-title">
+        <h1><a href="/">Passkeeper</a></h1>
+    </div>
+
+    <div class="access-list">
+
+    <table>
+
+      <tr>
+        <th>Пользователь</th>
+        <th>Заголовок</th>
+        <th>Сервис</th>
+        <td><a href="{% url 'access_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a></td>
+      </tr>
+
+        {% for listOfAccess in listOfAccess %}
+      <tr>
+
+        <td>{{ listOfAccess.author }}</td>
+        <td><a href="{% url 'access_detail' pk=listOfAccess.pk %}">{{ listOfAccess.title }}</a></td>
+        <td>{{ listOfAccess.service }}</td>
+        <td><a class="btn btn-default" href="{% url 'access_edit' pk=listOfAccess.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+        <td><span class="glyphicon glyphicon-minus"></span></td>
+      </tr>
+        {% endfor %}
+    </table>
+        
+    </div>
+
+</body>
+</html>

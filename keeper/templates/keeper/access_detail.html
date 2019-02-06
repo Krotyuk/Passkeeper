@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="post">
+    <a class="btn btn-default" href="{% url 'access_edit' pk=listOfAccess.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <h1>{{ access_detail.title }}</h1>
+        <p>{{ access_detail.comment|linebreaksbr }}</p>
+    </div>
+</body>
+</html>
